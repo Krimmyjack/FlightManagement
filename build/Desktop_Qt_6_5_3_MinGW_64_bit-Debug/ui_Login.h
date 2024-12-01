@@ -36,7 +36,7 @@ public:
     {
         if (Login->objectName().isEmpty())
             Login->setObjectName("Login");
-        Login->resize(634, 485);
+        Login->resize(633, 500);
         QFont font;
         font.setFamilies({QString::fromUtf8("MingLiU-ExtB")});
         Login->setFont(font);

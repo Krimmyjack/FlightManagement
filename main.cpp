@@ -7,6 +7,8 @@
 #include <QSqlError>
 #include <QDebug>
  #include"Login.h"
+#include"Mine_indent.h"
+#include"Indent_detail.h".h"
 QSqlDatabase dbcon;
 QSqlDatabase flight;
 int main(int argc, char *argv[])
@@ -51,8 +53,8 @@ int main(int argc, char *argv[])
     // w.setWindowTitle("航班管理系统");
     // w.resize(800, 600);
     // w.show();
-     Login *u= new Login();
-     u->show();
+
+    //indentDetail->getWidget()->show();
     // Register *u = new Register();
     // u->show();
      // if(u->f==1)

@@ -10,18 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     Forget.cpp \
+    Indent_detail.cpp \
     Login.cpp \
+    Mine_indent.cpp \
     Register.cpp \
     main.cpp \
-    mainwindow.cpp \
-    myeventfilter.cpp
+    mainwindow.cpp
 
 HEADERS += \
     Forget.h \
+    Indent_detail.h \
     Login.h \
+    Mine_indent.h \
     Register.h \
-    mainwindow.h \
-    myeventfilter.h
+    mainwindow.h
 
 FORMS += \
     Forget.ui \

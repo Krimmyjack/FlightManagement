@@ -54,7 +54,7 @@ public:
     {
         if (Forget->objectName().isEmpty())
             Forget->setObjectName("Forget");
-        Forget->resize(621, 435);
+        Forget->resize(587, 417);
         Forget->setStyleSheet(QString::fromUtf8("/* \350\256\276\347\275\256 QMainWindow \347\232\204\350\203\214\346\231\257\345\222\214\345\255\227\344\275\223 */\n"
 "QDialog{\n"
 "    background: rgb(255, 255, 255); /* \350\203\214\346\231\257\350\211\262\344\270\272\347\231\275\350\211\262 */\n"

@@ -72,7 +72,6 @@ Login::Login(QWidget *parent)
         }
     });
 }
-
 Login::~Login()
 {
     delete ui;
