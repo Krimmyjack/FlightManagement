@@ -5,7 +5,7 @@
 #include <QDateTime>
 #include<QTime>
 #include<QVBoxLayout>
-
+#include<QPainter>
 class Indent_detail : public QWidget
 {
     Q_OBJECT
@@ -26,14 +26,43 @@ public:
                            int ucost,
                            //int Duration,
                            bool ustatus);
-    QWidget* getWidget();
+     QDateTime getDepartureDate()const
+    {
+        return departure_Date;
+    }
 
 private:
+
+    void getWidget();
     void setupDateAndStatusLabels(QVBoxLayout *layout);
     void setupFlightInfoLabels(QVBoxLayout *layout);
     void setupFlightDetailsLabels(QVBoxLayout *layout);
     void setupPassengerInfoLabels(QVBoxLayout *layout);
     void setupTicketActions(QVBoxLayout *layout);
+    void paintEvent(QPaintEvent *event) override {
+        // 先调用父类的 paintEvent 确保子控件正确绘制
+        //QWidget::paintEvent(event);
+
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing, true); // 抗锯齿
+
+        // 绘制渐变背景
+        QLinearGradient gradient(0, 0, 0, height());
+        if(statuss==0)
+        {
+            gradient.setColorAt(0, QColor(255, 255, 255));  // 白色
+            gradient.setColorAt(1, QColor(224, 223, 255)); // 淡紫色
+        }
+        else
+        {
+            gradient.setColorAt(0, QColor(255, 255, 255));  // 白色
+            gradient.setColorAt(1, QColor(138, 255, 230)); // 淡紫色
+        }
+
+        painter.setBrush(gradient);
+        painter.setPen(Qt::NoPen);  // 不需要边框
+        painter.drawRect(rect());   // 使用 rect() 方法获取整个 widget 的矩形区域
+    }
 
     // 成员变量
     QString name;  // 真实姓名

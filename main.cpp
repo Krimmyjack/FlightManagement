@@ -36,19 +36,11 @@ int main(int argc, char *argv[])
     } else {
         qDebug() << "Success, persondatabase 数据库文件打开成功！";
     }
-    // QSqlDatabase dbcon = QSqlDatabase::addDatabase("QODBC");
-    // dbcon.setHostName("127.0.0.1");
-    // dbcon.setPort(3306);
-    // dbcon.setDatabaseName("tickets");
-    // dbcon.setUserName("root");  // 添加用户名
-    // dbcon.setPassword("20050516");  // 添加密码
 
-    // bool ok = dbcon.open();
-    // if (!ok) {
-    //     qDebug() << "Error, persondatabase 数据库文件打开失败！" << dbcon.lastError().text();
-    // } else {
-    //     qDebug() << "Success, persondatabase 数据库文件打开成功！";
-    // }
+
+    Mine_indent *my= new Mine_indent("lijiahui",0);
+    //my->setUsername("lijiahui");
+    my->show();
     // MainWindow w;
     // w.setWindowTitle("航班管理系统");
     // w.resize(800, 600);
