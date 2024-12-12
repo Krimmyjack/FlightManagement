@@ -30,6 +30,12 @@ public:
     QVBoxLayout *verticalLayout;
     QSpacerItem *verticalSpacer;
     QLabel *Label;
+    QWidget *widget_6;
+    QHBoxLayout *horizontalLayout_5;
+    QSpacerItem *horizontalSpacer_10;
+    QLabel *label_2;
+    QLineEdit *Id_card;
+    QSpacerItem *horizontalSpacer_11;
     QWidget *widget_3;
     QHBoxLayout *horizontalLayout_3;
     QSpacerItem *horizontalSpacer;
@@ -148,6 +154,37 @@ public:
 
         verticalLayout_2->addWidget(Label);
 
+        widget_6 = new QWidget(Register);
+        widget_6->setObjectName("widget_6");
+        horizontalLayout_5 = new QHBoxLayout(widget_6);
+        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_10);
+
+        label_2 = new QLabel(widget_6);
+        label_2->setObjectName("label_2");
+        QFont font1;
+        font1.setFamilies({QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221")});
+        font1.setPointSize(14);
+        font1.setBold(true);
+        label_2->setFont(font1);
+
+        horizontalLayout_5->addWidget(label_2);
+
+        Id_card = new QLineEdit(widget_6);
+        Id_card->setObjectName("Id_card");
+        Id_card->setMinimumSize(QSize(0, 30));
+
+        horizontalLayout_5->addWidget(Id_card);
+
+        horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_11);
+
+
+        verticalLayout_2->addWidget(widget_6);
+
         widget_3 = new QWidget(Register);
         widget_3->setObjectName("widget_3");
         horizontalLayout_3 = new QHBoxLayout(widget_3);
@@ -159,10 +196,6 @@ public:
         label = new QLabel(widget_3);
         label->setObjectName("label");
         label->setMinimumSize(QSize(40, 30));
-        QFont font1;
-        font1.setFamilies({QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221")});
-        font1.setPointSize(14);
-        font1.setBold(true);
         label->setFont(font1);
         label->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
@@ -296,8 +329,9 @@ public:
     {
         Register->setWindowTitle(QCoreApplication::translate("Register", "Dialog", nullptr));
         Label->setText(QCoreApplication::translate("Register", "\346\263\250\345\206\214", nullptr));
+        label_2->setText(QCoreApplication::translate("Register", "\350\272\253\344\273\275\345\217\267", nullptr));
         label->setText(QCoreApplication::translate("Register", "\351\202\256\347\256\261\357\274\232", nullptr));
-        label_4->setText(QCoreApplication::translate("Register", "\347\224\250\346\210\267\345\220\215\357\274\232", nullptr));
+        label_4->setText(QCoreApplication::translate("Register", "\345\220\215\345\255\227\357\274\232", nullptr));
         label_3->setText(QCoreApplication::translate("Register", "\345\257\206\347\240\201\357\274\232", nullptr));
         pushButton->setText(QCoreApplication::translate("Register", "\346\263\250\345\206\214", nullptr));
         pushButton_2->setText(QCoreApplication::translate("Register", "\345\217\226\346\266\210", nullptr));

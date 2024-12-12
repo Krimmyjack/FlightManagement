@@ -5,7 +5,8 @@
 #include <QHBoxLayout>
 #include <QDateTime>
 #include <QIcon>
-
+#include<QSqlQuery>
+#include<Changed.h>
 Indent_detail::Indent_detail(QWidget *parent,
                              const QString &uname,
                              const QString &departure_city,
@@ -18,9 +19,11 @@ Indent_detail::Indent_detail(QWidget *parent,
                              const QString &airline,
                              const QString &airmodel,
                              const QTime &Duration,
+                             const QString & card,
                              int uclass,
                              int ucost,
-                             bool ustatus)
+                             bool ustatus,
+                             int change)
     : QWidget(parent),
     name(uname),
     fli_number(number),
@@ -35,10 +38,34 @@ Indent_detail::Indent_detail(QWidget *parent,
     arrival_time(adate),
     airline(airline),
     airmodel(airmodel),
-    duration(Duration)
+    duration(Duration),
+    id_card(card),
+    change(change)
 {
     // 计算到达时间
     //arrival_time = departure_Date.addSecs(duration.hour() * 3600 + duration.minute() * 60);
+    refundMessage = new QMessageBox(this);
+    refundMessage->setIcon(QMessageBox::Warning);
+    refundMessage->setWindowTitle("退票确认");
+    refundMessage->setText("您确定要进行退票操作吗？");
+    refundMessage->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    refundMessage->setDefaultButton(QMessageBox::No);
+    refundMessage->setWindowFlags(refundMessage->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    refundMessage->setStyleSheet(
+        "QMessageBox {"
+        "background-color: #f0f0f0;"
+        "font-size: 14px;"
+        "}"
+        "QMessageBox QLabel{"
+        "color: blue;"
+        "}"
+        "QMessageBox QPushButton{"
+        "background-color: #4CAF50;"
+        "color: white;"
+        "border: none;"
+        "padding: 5px 10px;"
+        "}"
+        );
     getWidget();
 }
 void Indent_detail::getWidget()
@@ -195,9 +222,11 @@ void Indent_detail::setupTicketActions(QVBoxLayout *layout)
     QHBoxLayout *ticketActionsLayout = new QHBoxLayout(this);
     QLabel *priceLabel = new QLabel(QString("票价：￥%1").arg(cost), this);
     priceLabel->setStyleSheet("font-family: 'Microsoft YaHei'; font-size: 14px; color: #FF9800;background-color: transparent; font-weight: bold;");
+    ticketActionsLayout->addWidget(priceLabel);
 
-    QPushButton *refundButton = new QPushButton(QIcon(":/icons/refund.png"), "退票", this);
     //refundButton->setStyleSheet("background-color: #E91E63; color: white; border-radius: 5px; padding: 10px 20px; font-family: 'Microsoft YaHei'; font-size: 16px; font-weight: bold;");
+    if(change==1)
+    {
     QPushButton *changeButton = new QPushButton(QIcon(":/icons/change.png"), "改签", this);
     changeButton->setStyleSheet(
         "QPushButton {"
@@ -216,6 +245,20 @@ void Indent_detail::setupTicketActions(QVBoxLayout *layout)
         "background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #6D6CFF, stop:1 #8E7AFE);" // 按下时更深的渐变色
         "}"
         );
+     ticketActionsLayout->addWidget(changeButton);
+        connect(changeButton,&QPushButton::clicked,this,[=]{
+            QString cla;
+         if(fli_class==1) cla="first_class";
+         else if(fli_class==2) cla="business";
+         else cla="economy";
+            Changed *change = new Changed(nullptr,departure_city,arrival_city,name,departure_Date,fli_number,cla,cost,id_card);//传递参数不同,id由order来的
+            connect (change,&Changed::complete,this,&Indent_detail::handlecomplete);
+            change->resize(800,600);
+            change->setWindowModality(Qt::ApplicationModal);
+            change->show();
+        });
+      }
+     QPushButton *refundButton = new QPushButton(QIcon(":/icons/refund.png"), "退票", this);
     refundButton->setStyleSheet(
         "QPushButton {"
         "background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #7F7EFF, stop:1 #9E8CFE);" // 渐变紫色背景
@@ -233,11 +276,22 @@ void Indent_detail::setupTicketActions(QVBoxLayout *layout)
         "background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #6D6CFF, stop:1 #8E7AFE);" // 按下时更深的渐变色
         "}"
         );
-    ticketActionsLayout->addWidget(priceLabel);
+
     ticketActionsLayout->addWidget(refundButton);
-    ticketActionsLayout->addWidget(changeButton);
+    connect(refundButton,&QPushButton::clicked,this,&Indent_detail::ondeleteCliced);
+
     layout->addLayout(ticketActionsLayout);
 }
-
-
+void Indent_detail::ondeleteCliced()
+{
+        if(refundMessage->exec()==QMessageBox::Yes)
+        {
+           emit deleteRequested(name,fli_number,fli_class,departure_Date);
+        }
+}
+void Indent_detail::handlecomplete()
+{
+    qDebug()<<"have change";
+    emit completed();
+}
 

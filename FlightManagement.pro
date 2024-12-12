@@ -9,20 +9,26 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Changed.cpp \
     Forget.cpp \
     Indent_detail.cpp \
     Login.cpp \
     Mine_indent.cpp \
+    Refundticketwidget.cpp \
     Register.cpp \
+    change_flightinfo.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    Changed.h \
     Forget.h \
     Indent_detail.h \
     Login.h \
     Mine_indent.h \
+    Refundticketwidget.h \
     Register.h \
+    change_flightinfo.h \
     mainwindow.h
 
 FORMS += \

@@ -162,7 +162,7 @@ public:
     {
         Login->setWindowTitle(QCoreApplication::translate("Login", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("Login", "\347\231\273\345\275\225/", nullptr));
-        label_2->setText(QCoreApplication::translate("Login", "\347\224\250\346\210\267\345\220\215\357\274\232", nullptr));
+        label_2->setText(QCoreApplication::translate("Login", "\350\272\253\344\273\275\345\217\267\357\274\232", nullptr));
         label_3->setText(QCoreApplication::translate("Login", "\345\257\206\347\240\201\357\274\232", nullptr));
         pushButton_2->setText(QCoreApplication::translate("Login", "\347\231\273\345\275\225", nullptr));
         forget->setText(QCoreApplication::translate("Login", "\345\277\230\350\256\260\345\257\206\347\240\201", nullptr));

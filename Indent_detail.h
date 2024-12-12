@@ -6,6 +6,7 @@
 #include<QTime>
 #include<QVBoxLayout>
 #include<QPainter>
+#include<QMessageBox>
 class Indent_detail : public QWidget
 {
     Q_OBJECT
@@ -22,10 +23,13 @@ public:
                            const QString &airline,
                            const QString &airmodel,
                            const QTime & Duration,
+                           const QString& card,
                            int uclass,
                            int ucost,
                            //int Duration,
-                           bool ustatus);
+                           bool ustatus,
+                           int change
+                           );
      QDateTime getDepartureDate()const
     {
         return departure_Date;
@@ -75,9 +79,15 @@ private:
     QDateTime arrival_time;//到达天数时间
     QString airline,airmodel;
     QTime duration;
-
+    QMessageBox *refundMessage;
+    QString id_card;
+    int change;
 signals:
-
+    void deleteRequested(const QString& name,const QString& plane,const int& uclass,const QDateTime& time);
+    void completed();
+private slots:
+    void ondeleteCliced();
+    void handlecomplete();
 };
 
 #endif // INDENT_DETAIL_H

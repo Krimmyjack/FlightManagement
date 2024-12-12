@@ -9,12 +9,12 @@ Forget::Forget(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->find_button,&QPushButton::clicked,this,[=]{
-        QString name = ui->Username->text();
+        QString card = ui->Username->text();
         QString email = ui->Email->text();
         QSqlQuery query;
-        query.prepare("SELECT password FROM users WHERE email = :email AND username= :username ");
+        query.prepare("SELECT password FROM users WHERE email = :email AND ID_card= :ID_card ");
         query.bindValue(":email",email);
-        query.bindValue(":username",name);
+        query.bindValue(":ID_card",card);
         if(query.exec())
         {
             if(query.next())

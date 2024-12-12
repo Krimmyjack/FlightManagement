@@ -12,25 +12,27 @@ class Mine_indent : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Mine_indent(const QString & name,const bool &ustatus,QWidget *parent = nullptr);
+    explicit Mine_indent(const QString & id_card,const bool &ustatus,QWidget *parent = nullptr);
 private:
 
     void createContentArea();
     void queryINFO();
     void createMainLayout();
-
+    void refresh();
     QPushButton *createButton(const QString &text) {
         QPushButton *button = new QPushButton(text, this);
         button->setStyleSheet("background-color: #4a90e2; color: white; padding: 10px; margin: 5px;");
         return button;
     }
  //  static  bool compareByDepartureDate(const Indent_detail* a, const Indent_detail* b);
-    QWidget *contentWidget; // 中间内容区域的小部件
-    QString Username;//根据用户名来查询订单信息。
+    QWidget *contentWidget=nullptr; // 中间内容区域的小部件
+    QVBoxLayout *mainLayout;
+    QString card;//根据用户名来查询订单信息。
     bool status;
     std::vector<Indent_detail*> q;//订单的窗口
-signals:
-
+private slots:
+    void handledeleteRequest(const QString& name,const QString& plane,const int &uclass,const QDateTime& time);
+    void handlecomplete();
 };
 
 #endif // MINE_INDENT_H

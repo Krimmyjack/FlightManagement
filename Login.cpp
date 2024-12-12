@@ -44,16 +44,16 @@ Login::Login(QWidget *parent)
     });
 
     connect(ui->pushButton_2,&QPushButton::clicked,this,[=]{
-        QSqlQuery query("SELECT * FROM users");
+        QSqlQuery query("SELECT ID_card,password FROM users");
         while(query.next())
         {
-            int id = query.value(0).toInt();
-            QString username = query.value(1).toString();
-            QString password = query.value(2).toString();
-            QString name= ui->lineEdit->text();
+            //int id = query.value(0).toInt();
+            QString card = query.value(0).toString();
+            QString password = query.value(1).toString();
+            QString ucard = ui->lineEdit->text();
             QString words= ui->lineEdit_2->text();
-            qDebug() << name<<" "<<words<<" "<<username<<" "<<password<<"\n";
-            if(name==username&&password==words)
+            //qDebug() << name<<" "<<words<<" "<<username<<" "<<password<<"\n";
+            if(card==ucard&&password==words)
             {
                 f=1;
                 break;

@@ -239,7 +239,7 @@ public:
         Forget->setWindowTitle(QCoreApplication::translate("Forget", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("Forget", "\346\211\276\345\233\236\345\257\206\347\240\201", nullptr));
         label_2->setText(QCoreApplication::translate("Forget", "\346\263\250\345\206\214\351\202\256\347\256\261:", nullptr));
-        label_3->setText(QCoreApplication::translate("Forget", "\347\224\250\346\210\267\345\220\215:", nullptr));
+        label_3->setText(QCoreApplication::translate("Forget", "\350\272\253\344\273\275\345\217\267\357\274\232", nullptr));
         find_button->setText(QCoreApplication::translate("Forget", "\346\211\276\345\233\236\345\257\206\347\240\201", nullptr));
     } // retranslateUi
 

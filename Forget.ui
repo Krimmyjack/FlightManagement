@@ -223,7 +223,7 @@ QLabel {
          </font>
         </property>
         <property name="text">
-         <string>用户名:</string>
+         <string>身份号：</string>
         </property>
        </widget>
       </item>

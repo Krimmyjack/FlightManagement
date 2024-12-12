@@ -9,6 +9,7 @@
  #include"Login.h"
 #include"Mine_indent.h"
 #include"Indent_detail.h".h"
+#include"Refundticketwidget.h"
 QSqlDatabase dbcon;
 QSqlDatabase flight;
 int main(int argc, char *argv[])
@@ -37,8 +38,15 @@ int main(int argc, char *argv[])
         qDebug() << "Success, persondatabase 数据库文件打开成功！";
     }
 
+    // if (!dbcon.transaction()) {
+    //     qDebug() << "Failed to start transaction:" << dbcon.lastError().text();
+    //     dbcon.close();
+    //     return;
+    // }
 
-    Mine_indent *my= new Mine_indent("lijiahui",0);
+     // RefundTicketWidget *my = new RefundTicketWidget();
+     // my->show();
+    Mine_indent *my= new Mine_indent("23331071",0);//传入用户的id和订单的状态
     //my->setUsername("lijiahui");
     my->show();
     // MainWindow w;

@@ -13,7 +13,7 @@ Register::Register(QWidget *parent)
         QString name = ui->Username->text();
         QString email = ui->Email->text();
         QString passwords = ui->Passwords->text();
-
+        QString card = ui->Id_card->text();
         // 如果用户名为空
         if (name.isEmpty()) {
             QMessageBox::warning(this, "输入错误", "用户名不能为空！");
@@ -34,6 +34,16 @@ Register::Register(QWidget *parent)
             ui->Username->clear();
             ui->Email->clear();
             ui->Passwords->clear();
+            ui->Id_card->clear();
+            return;
+        }
+        if(card.size()!=8)
+        {
+            QMessageBox::warning(this, "注册失败", "密码长度必须至少为 8 个字符！");
+            ui->Username->clear();
+            ui->Email->clear();
+            ui->Passwords->clear();
+            ui->Id_card->clear();
             return;
         }
 
@@ -52,15 +62,30 @@ Register::Register(QWidget *parent)
                 return;
             }
         }
+        //QSqlQuery query;
+        query.prepare("SELECT COUNT(*) FROM users WHERE ID_card = :ID_card");
+        query.bindValue(":ID_card",card);
+        if(query.exec())
+        {
+            query.next();
+            int count= query.value(0).toInt();
+            if(count>0)
+            {
+                QMessageBox::warning(this, "身份已注册", "该身份已被注册，请使用其他身份！");
+               ui->Id_card->clear();  // 清空邮箱输入框
+                return;
+            }
+        }
         // else
         //     {
         //     qDebug() << "Error checking email:" << query.lastError().text();
         // }
         // 2. 执行插入操作
-        query.prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
+        query.prepare("INSERT INTO users (username, password, email,ID_card) VALUES (:username, :password, :email, :ID_card)");
         query.bindValue(":username", name);
         query.bindValue(":password", passwords);
         query.bindValue(":email", email);
+        query.bindValue(":ID_card",card);
 
         if (query.exec()) {
             QMessageBox::information(this, "注册成功", "注册成功，请返回重新登录");
@@ -70,6 +95,7 @@ Register::Register(QWidget *parent)
             ui->Username->clear();
             ui->Email->clear();
             ui->Passwords->clear();
+            ui->Id_card->clear();
         }
     });
 
