@@ -16,7 +16,7 @@ Changed::Changed(QWidget *parent,
                  const QDateTime &departure_date_param,
                  const QString& fli_number,
                  const QString& fli_class,
-                 const int& cost,
+                 const double& cost,
                  const QString& card)
     : QWidget(parent),
     id_card(card),

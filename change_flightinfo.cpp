@@ -12,7 +12,7 @@
 #include <QLineEdit>
 #include<QSqlError>
 #include<QSqlQuery>
-change_flightinfo::change_flightinfo(const FlightData &data,const QString& real_name,const QString& fli_number,const QString& fli_class,const QDateTime& departure_date,const int price,const QString& card,  QWidget *parent)
+change_flightinfo::change_flightinfo(const FlightData &data,const QString& real_name,const QString& fli_number,const QString& fli_class,const QDateTime& departure_date,const double price,const QString& card,  QWidget *parent)
     : QWidget(parent), data(data),real_name(real_name),fli_number(fli_number),fli_class(fli_class),departure_date(departure_date),price(price),id_card(card)
 {
     // 设置主布局
@@ -425,13 +425,13 @@ bool change_flightinfo::createNewOrder(QSqlQuery &query, const QString &type) {
 }
 
 bool change_flightinfo::updateWalletTransaction(QSqlQuery &query, const QString &type) {
-    int now_price = getPrice(type); // 假设有一个方法获取对应舱位的价格
+    double now_price = getPrice(type); // 假设有一个方法获取对应舱位的价格
 
-    query.prepare("INSERT INTO wallet_transactions (username, id_card, transaction_type, amount, transaction_time, flight_number, departure_city, destination_city) "
-                  "VALUES (:username, :id_card, :transaction_type, :amount, :transaction_time, :flight_number, :departure_city, :destination_city)");
+    query.prepare("INSERT INTO wallet_transactions (username, ID_card, transaction_type, amount, transaction_time, flight_number, departure_city, destination_city) "
+                  "VALUES (:username, :ID_card, :transaction_type, :amount, :transaction_time, :flight_number, :departure_city, :destination_city)");
 
     query.bindValue(":username", real_name);
-    query.bindValue(":id_card", id_card);
+    query.bindValue(":ID_card", id_card);
     query.bindValue(":transaction_type", now_price < price ? "Change_add" : "Change_sub");
     query.bindValue(":amount", qAbs(now_price - price));
     query.bindValue(":transaction_time", QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")); // 格式化日期时间字符串
@@ -443,6 +443,16 @@ bool change_flightinfo::updateWalletTransaction(QSqlQuery &query, const QString 
         qDebug() << "Failed to update wallet transaction:" << query.lastError().text();
         return false;
     }
+
+
+    query.prepare("UPDATE users SET balance = balance + :price WHERE Id_card =:id_card");
+    query.bindValue(":price",price-now_price);
+    query.bindValue(":id_card",id_card);
+    if (!query.exec()) {
+        qDebug() << "Failed to update wallet transaction:" << query.lastError().text();
+        return false;
+    }
+
     return true;
 }
 

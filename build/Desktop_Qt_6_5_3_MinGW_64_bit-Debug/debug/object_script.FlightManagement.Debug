@@ -2,9 +2,11 @@ debug/Changed.o
 debug/Forget.o
 debug/Indent_detail.o
 debug/Login.o
+debug/Mine.o
 debug/Mine_indent.o
 debug/Refundticketwidget.o
 debug/Register.o
+debug/Tickets.o
 debug/change_flightinfo.o
 debug/main.o
 debug/mainwindow.o
@@ -14,8 +16,10 @@ debug/moc_Changed.o
 debug/moc_Forget.o
 debug/moc_Indent_detail.o
 debug/moc_Login.o
+debug/moc_Mine.o
 debug/moc_Mine_indent.o
 debug/moc_Refundticketwidget.o
 debug/moc_Register.o
+debug/moc_Tickets.o
 debug/moc_change_flightinfo.o
 debug/moc_mainwindow.o

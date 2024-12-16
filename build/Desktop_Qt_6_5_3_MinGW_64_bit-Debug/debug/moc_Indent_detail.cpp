@@ -42,6 +42,8 @@ constexpr auto qt_meta_stringdata_CLASSIndent_detailENDCLASS = QtMocHelpers::str
     "plane",
     "uclass",
     "time",
+    "price",
+    "id_card",
     "completed",
     "ondeleteCliced",
     "handlecomplete"
@@ -65,15 +67,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSIndent_detailENDCLASS[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    4,   38,    2, 0x06,    1 /* Public */,
-       7,    0,   47,    2, 0x06,    6 /* Public */,
+       1,    6,   38,    2, 0x06,    1 /* Public */,
+       9,    0,   51,    2, 0x06,    8 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    0,   48,    2, 0x08,    7 /* Private */,
-       9,    0,   49,    2, 0x08,    8 /* Private */,
+      10,    0,   52,    2, 0x08,    9 /* Private */,
+      11,    0,   53,    2, 0x08,   10 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QDateTime,    3,    4,    5,    6,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QDateTime, QMetaType::Double, QMetaType::QString,    3,    4,    5,    6,    7,    8,
     QMetaType::Void,
 
  // slots: parameters
@@ -98,6 +100,8 @@ Q_CONSTINIT const QMetaObject Indent_detail::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         QtPrivate::TypeAndForceComplete<const int &, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QDateTime &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const double &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'completed'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'ondeleteCliced'
@@ -114,7 +118,7 @@ void Indent_detail::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<Indent_detail *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->deleteRequested((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QDateTime>>(_a[4]))); break;
+        case 0: _t->deleteRequested((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QDateTime>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<double>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6]))); break;
         case 1: _t->completed(); break;
         case 2: _t->ondeleteCliced(); break;
         case 3: _t->handlecomplete(); break;
@@ -123,7 +127,7 @@ void Indent_detail::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Indent_detail::*)(const QString & , const QString & , const int & , const QDateTime & );
+            using _t = void (Indent_detail::*)(const QString & , const QString & , const int & , const QDateTime & , const double & , const QString & );
             if (_t _q_method = &Indent_detail::deleteRequested; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
@@ -170,9 +174,9 @@ int Indent_detail::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Indent_detail::deleteRequested(const QString & _t1, const QString & _t2, const int & _t3, const QDateTime & _t4)
+void Indent_detail::deleteRequested(const QString & _t1, const QString & _t2, const int & _t3, const QDateTime & _t4, const double & _t5, const QString & _t6)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t5))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t6))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 

@@ -31,11 +31,11 @@ public:
                      const QDateTime &departure_date,
                      const QString& fli_number,
                      const QString& fli_class,
-                     const int& cost,
+                     const double& cost,
                      const QString& card);
 //Changed *change = new Changed(nullptr,departure_city,arrival_city,name,departure_Date,fli_number,fli_class,cost,id_card);
 private:
-    int cost;
+    double cost;
     QLineEdit *departureInput;
     QLineEdit *destinationInput;
     QListWidget *addressListOpt;

@@ -13,9 +13,11 @@ SOURCES += \
     Forget.cpp \
     Indent_detail.cpp \
     Login.cpp \
+    Mine.cpp \
     Mine_indent.cpp \
     Refundticketwidget.cpp \
     Register.cpp \
+    Tickets.cpp \
     change_flightinfo.cpp \
     main.cpp \
     mainwindow.cpp
@@ -25,9 +27,11 @@ HEADERS += \
     Forget.h \
     Indent_detail.h \
     Login.h \
+    Mine.h \
     Mine_indent.h \
     Refundticketwidget.h \
     Register.h \
+    Tickets.h \
     change_flightinfo.h \
     mainwindow.h
 

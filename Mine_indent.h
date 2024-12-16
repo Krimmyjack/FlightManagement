@@ -31,7 +31,7 @@ private:
     bool status;
     std::vector<Indent_detail*> q;//订单的窗口
 private slots:
-    void handledeleteRequest(const QString& name,const QString& plane,const int &uclass,const QDateTime& time);
+    void handledeleteRequest(const QString& name,const QString& plane,const int &uclass,const QDateTime& time,const double& price,const QString& id_card);
     void handlecomplete();
 };
 

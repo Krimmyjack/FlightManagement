@@ -43,6 +43,8 @@ constexpr auto qt_meta_stringdata_CLASSMine_indentENDCLASS = QtMocHelpers::strin
     "plane",
     "uclass",
     "time",
+    "price",
+    "id_card",
     "handlecomplete"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
@@ -64,11 +66,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMine_indentENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    4,   26,    2, 0x08,    1 /* Private */,
-       7,    0,   35,    2, 0x08,    6 /* Private */,
+       1,    6,   26,    2, 0x08,    1 /* Private */,
+       9,    0,   39,    2, 0x08,    8 /* Private */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QDateTime,    3,    4,    5,    6,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::QDateTime, QMetaType::Double, QMetaType::QString,    3,    4,    5,    6,    7,    8,
     QMetaType::Void,
 
        0        // eod
@@ -89,6 +91,8 @@ Q_CONSTINIT const QMetaObject Mine_indent::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         QtPrivate::TypeAndForceComplete<const int &, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QDateTime &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const double &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'handlecomplete'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
@@ -101,7 +105,7 @@ void Mine_indent::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<Mine_indent *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->handledeleteRequest((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QDateTime>>(_a[4]))); break;
+        case 0: _t->handledeleteRequest((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QDateTime>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<double>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6]))); break;
         case 1: _t->handlecomplete(); break;
         default: ;
         }

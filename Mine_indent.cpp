@@ -24,7 +24,8 @@ void Mine_indent::createContentArea()
         QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
 
         // 标题
-        QLabel *titleLabel = new QLabel("待出行订单", this);
+
+        QLabel *titleLabel = new QLabel((status==0)?"待出行订单":"已出行订单", this);
         titleLabel->setStyleSheet("font-size: 24px; color: #4a90e2;");
         contentLayout->addWidget(titleLabel);
 
@@ -129,7 +130,7 @@ void Mine_indent::queryINFO()
     // }
 
     QSqlQuery query;
-    if (!query.exec("SELECT ID_card, realname, flight_number, seat_class, price, status, departure_time,changed FROM orders"))
+    if (!query.exec("SELECT Id_card, realname, flight_number, seat_class, price, status, departure_time,changed FROM orders"))
     {
         qDebug() << "Failed to execute orders query. Error:" << query.lastError().text();
         return;
@@ -147,7 +148,7 @@ void Mine_indent::queryINFO()
             QString fli_number = query.value(2).toString();
             QDateTime departure_Date = query.value(6).toDateTime();
             QString dd = query.value(3).toString();
-            int cost = query.value(4).toInt();
+            double cost = query.value(4).toDouble();
             //bool statuss = (query.value(5).toString() == "upcoming");
             int change= query.value(7).toInt();
             int fli_class;
@@ -191,7 +192,7 @@ void Mine_indent::queryINFO()
                 QString departure_airport = query1.value(5).toString();
                 QDateTime arrival_time = query1.value(6).toDateTime();
                 QTime duration = query1.value(7).toTime();
-
+                bool day=0;
                 qDebug() << "Flight details: Airline:" << airline
                          << ", Model:" << airmodel
                          << ", From:" << departure_city << "(" << departure_airport << ")"
@@ -216,7 +217,8 @@ void Mine_indent::queryINFO()
                     fli_class,
                     cost,
                     status,
-                    change
+                    change,
+                    day
                     );
                 //QWidget *widget = indent->getWidget();
                 connect(indent,&Indent_detail::deleteRequested,this,&Mine_indent::handledeleteRequest);
@@ -239,7 +241,7 @@ void Mine_indent::queryINFO()
 // {
 //     return a->getDepartureDate() < b->getDepartureDate();
 // }
-void Mine_indent::handledeleteRequest(const QString& name,const QString& plane,const int &uclass,const QDateTime& time)
+void Mine_indent::handledeleteRequest(const QString& name,const QString& plane,const int &uclass,const QDateTime& time,const double& price,const QString& id_card)
 {
 
         QSqlQuery queryy;
@@ -309,6 +311,28 @@ void Mine_indent::handledeleteRequest(const QString& name,const QString& plane,c
             } else {
                 qDebug() << "Failed to execute update query:" << updateQuery.lastError().text();
                 QSqlDatabase::database().rollback(); // 更新失败，回滚事务
+            }
+
+            updateQuery.prepare("INSERT INTO wallet_transactions (username, ID_card, transaction_type, amount, transaction_time, flight_number) "
+                          "VALUES (:username, :ID_card, :transaction_type, :amount, :transaction_time, :flight_number)");
+
+            updateQuery.bindValue(":username", name);
+            updateQuery.bindValue(":ID_card", id_card);
+            updateQuery.bindValue(":transaction_type","Refund");
+            updateQuery.bindValue(":amount", price);
+            updateQuery.bindValue(":transaction_time", QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")); // 格式化日期时间字符串
+            updateQuery.bindValue(":flight_number", plane);
+
+            if (!updateQuery.exec()) {
+                qDebug() << "Failed to update wallet transaction:" << updateQuery.lastError().text();
+                 QSqlDatabase::database().rollback();
+            }
+            updateQuery.prepare("UPDATE users SET balance = balance + :price WHERE Id_card =:id_card");
+            updateQuery.bindValue(":price",price);
+            updateQuery.bindValue(":id_card",id_card);
+            if (!updateQuery.exec()) {
+                qDebug() << "Failed to update wallet transaction:" << updateQuery.lastError().text();
+                QSqlDatabase::database().rollback();
             }
 
         } else {

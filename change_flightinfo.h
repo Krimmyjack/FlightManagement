@@ -48,7 +48,7 @@ class change_flightinfo : public QWidget {
     Q_OBJECT
 
 public:
-    explicit change_flightinfo(const FlightData &data,const QString& real_name,const QString& fli_number,const QString& fli_class,const QDateTime& departure_date,const int price,const QString& card, QWidget *parent = nullptr);
+    explicit change_flightinfo(const FlightData &data,const QString& real_name,const QString& fli_number,const QString& fli_class,const QDateTime& departure_date,const double price,const QString& card, QWidget *parent = nullptr);
     ~change_flightinfo();
     //change_flightinfo *newFlightInfo = new change_flightinfo(data,real_name,fli_class,cost,this);
     double getPrice() const {
@@ -146,7 +146,7 @@ private:
     QPropertyAnimation *animation;  // 动画对象
     void updatePriceLabel();  //显示价格标签
     int uclass;
-    int price;//价格
+    double price;//价格
 
 signals:
     void completed();

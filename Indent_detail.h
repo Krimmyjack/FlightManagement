@@ -25,10 +25,11 @@ public:
                            const QTime & Duration,
                            const QString& card,
                            int uclass,
-                           int ucost,
+                           double ucost,
                            //int Duration,
-                           bool ustatus,
-                           int change
+                           int ustatus,
+                           int change,
+                           bool day
                            );
      QDateTime getDepartureDate()const
     {
@@ -52,7 +53,7 @@ private:
 
         // 绘制渐变背景
         QLinearGradient gradient(0, 0, 0, height());
-        if(statuss==0)
+        if(statuss==0||statuss==3)
         {
             gradient.setColorAt(0, QColor(255, 255, 255));  // 白色
             gradient.setColorAt(1, QColor(224, 223, 255)); // 淡紫色
@@ -72,8 +73,8 @@ private:
     QString name;  // 真实姓名
     QString fli_number;
     int fli_class; // 舱位等级 1为头等舱，2为商务舱，3为经济舱
-    int cost;      // 价格
-    bool statuss;
+    double cost;      // 价格
+    int statuss;
     QString departure_city, departure_airport, arrival_city, arrival_airport;
     QDateTime departure_Date;//离开天数时间
     QDateTime arrival_time;//到达天数时间
@@ -82,8 +83,9 @@ private:
     QMessageBox *refundMessage;
     QString id_card;
     int change;
+    bool day;
 signals:
-    void deleteRequested(const QString& name,const QString& plane,const int& uclass,const QDateTime& time);
+    void deleteRequested(const QString& name,const QString& plane,const int& uclass,const QDateTime& time,const double& price,const QString& id_card);
     void completed();
 private slots:
     void ondeleteCliced();

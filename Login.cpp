@@ -9,6 +9,7 @@
 #include<iostream>
 #include<QMainWindow>
 #include<QMessageBox>
+#include<QInputDialog>
 using namespace std;
 Login::Login(QWidget *parent)
     : QDialog(parent)
@@ -42,6 +43,29 @@ Login::Login(QWidget *parent)
             f->show();
         }
     });
+    // ui->registe->setTextFormat(Qt::RichText);
+    // ui->registe->setText("<a href=\"register_account1\">管理员注册</a>");
+    // ui->registe->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    // ui->registe->setOpenExternalLinks(false); // 禁止打开外部链接
+    // connect(ui->regis,&QLabel::linkActivated,this,[=](const QString &link) {
+    //     // 当点击链接时，打开 Forget 窗口
+    //     if (link == "register_account1") {
+    //         bool ok;
+    //         QString passwords = QInputDialog::getText(nullptr,
+    //                                                   tr("密码输入"),
+    //                                                   tr("请输入密码:"),
+    //                                                   QLineEdit::Password,
+    //                                                   QString(),
+    //                                                   &ok);
+
+    //         if (!ok || passwords.isEmpty()||passwords!="123456") {
+    //             QMessageBox::warning(nullptr, "警告", "取消操作");
+    //             return;
+    //         }
+    //         this->close();
+    //         v.show();
+    //     }
+    // });
 
     connect(ui->pushButton_2,&QPushButton::clicked,this,[=]{
         QSqlQuery query("SELECT ID_card,password FROM users");

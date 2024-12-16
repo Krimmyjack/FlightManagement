@@ -21,9 +21,10 @@ Indent_detail::Indent_detail(QWidget *parent,
                              const QTime &Duration,
                              const QString & card,
                              int uclass,
-                             int ucost,
-                             bool ustatus,
-                             int change)
+                             double ucost,
+                             int ustatus,
+                             int change,
+                             bool day)
     : QWidget(parent),
     name(uname),
     fli_number(number),
@@ -40,7 +41,8 @@ Indent_detail::Indent_detail(QWidget *parent,
     airmodel(airmodel),
     duration(Duration),
     id_card(card),
-    change(change)
+    change(change),
+    day(day)
 {
     // 计算到达时间
     //arrival_time = departure_Date.addSecs(duration.hour() * 3600 + duration.minute() * 60);
@@ -86,9 +88,20 @@ void Indent_detail::setupDateAndStatusLabels(QVBoxLayout *layout)
     QHBoxLayout *dateLayout = new QHBoxLayout(this);
     QLabel *datelabel = new QLabel(QString("%1年%2月%3日").arg(departure_Date.date().year()).arg(departure_Date.date().month()).arg(departure_Date.date().day()));
     datelabel->setStyleSheet("font-family: 'Microsoft YaHei'; font-size: 12px; background-color: transparent; color: #000000");
-    QLabel *status = new QLabel(statuss ? "已出行" : "未出行");
-    status->setStyleSheet(QString("font-family:'Microsoft YaHei'; color: %1; font-size: 16px;background-color: transparent; font-weight: bold;")
-                              .arg(statuss ? "#4CAF50" : "#F44336"));
+    QLabel *status;
+    if(statuss==3)
+    {
+        status = new QLabel((day==1) ? "次日到达" : "即日到达");
+        status->setStyleSheet(QString("font-family:'Microsoft YaHei'; color: %1; font-size: 16px;background-color: transparent; font-weight: bold;")
+                                  .arg(day ? "#F44336" : "#4CAF50"));
+    }
+    else
+    {
+        status = new QLabel((statuss==1) ? "已出行" : "未出行");
+        status->setStyleSheet(QString("font-family:'Microsoft YaHei'; color: %1; font-size: 16px;background-color: transparent; font-weight: bold;")
+                                  .arg(statuss ? "#4CAF50" : "#F44336"));
+    }
+
     dateLayout->addWidget(datelabel);
     dateLayout->addItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
     dateLayout->addWidget(status);
@@ -286,7 +299,7 @@ void Indent_detail::ondeleteCliced()
 {
         if(refundMessage->exec()==QMessageBox::Yes)
         {
-           emit deleteRequested(name,fli_number,fli_class,departure_Date);
+           emit deleteRequested(name,fli_number,fli_class,departure_Date,cost,id_card);
         }
 }
 void Indent_detail::handlecomplete()

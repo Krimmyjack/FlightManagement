@@ -10,6 +10,8 @@
 #include"Mine_indent.h"
 #include"Indent_detail.h".h"
 #include"Refundticketwidget.h"
+#include"Tickets.h"
+#include"Mine.h"
 QSqlDatabase dbcon;
 QSqlDatabase flight;
 int main(int argc, char *argv[])
@@ -46,7 +48,7 @@ int main(int argc, char *argv[])
 
      // RefundTicketWidget *my = new RefundTicketWidget();
      // my->show();
-    Mine_indent *my= new Mine_indent("23331071",0);//传入用户的id和订单的状态
+    Mine *my= new Mine("23331071");//传入用户的id和订单的状态
     //my->setUsername("lijiahui");
     my->show();
     // MainWindow w;

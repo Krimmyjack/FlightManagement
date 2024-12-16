@@ -31,6 +31,7 @@ public:
     QPushButton *pushButton_2;
     QLabel *forget;
     QLabel *regis;
+    QLabel *registe;
 
     void setupUi(QDialog *Login)
     {
@@ -152,6 +153,14 @@ public:
         regis->setObjectName("regis");
         regis->setGeometry(QRect(170, 50, 51, 31));
         regis->setFont(font1);
+        registe = new QLabel(frame);
+        registe->setObjectName("registe");
+        registe->setGeometry(QRect(250, 0, 71, 21));
+        QFont font4;
+        font4.setFamilies({QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221")});
+        font4.setPointSize(12);
+        font4.setBold(true);
+        registe->setFont(font4);
 
         retranslateUi(Login);
 
@@ -167,6 +176,7 @@ public:
         pushButton_2->setText(QCoreApplication::translate("Login", "\347\231\273\345\275\225", nullptr));
         forget->setText(QCoreApplication::translate("Login", "\345\277\230\350\256\260\345\257\206\347\240\201", nullptr));
         regis->setText(QCoreApplication::translate("Login", "\346\263\250\345\206\214", nullptr));
+        registe->setText(QCoreApplication::translate("Login", "\347\256\241\347\220\206\345\221\230\345\205\245\345\217\243", nullptr));
     } // retranslateUi
 
 };

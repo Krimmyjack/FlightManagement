@@ -2,9 +2,11 @@ release/Changed.o
 release/Forget.o
 release/Indent_detail.o
 release/Login.o
+release/Mine.o
 release/Mine_indent.o
 release/Refundticketwidget.o
 release/Register.o
+release/Tickets.o
 release/change_flightinfo.o
 release/main.o
 release/mainwindow.o
@@ -14,8 +16,10 @@ release/moc_Changed.o
 release/moc_Forget.o
 release/moc_Indent_detail.o
 release/moc_Login.o
+release/moc_Mine.o
 release/moc_Mine_indent.o
 release/moc_Refundticketwidget.o
 release/moc_Register.o
+release/moc_Tickets.o
 release/moc_change_flightinfo.o
 release/moc_mainwindow.o

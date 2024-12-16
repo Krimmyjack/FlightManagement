@@ -237,6 +237,26 @@ QLabel {
      <string>注册</string>
     </property>
    </widget>
+   <widget class="QLabel" name="registe">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>0</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>管理员入口</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
